@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../styles/bootstrap-4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/bootstrap-4/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../styles/more_styles/admin_style.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
+    <link rel="stylesheet" href="../jquery/jquery-ui/jquery-ui.min.css">
+    <link rel="manifest" href="../manifest.json">
+        <!-- CODELAB: Add iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Weather PWA">
+    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
+    
+    <script src="../jquery/jquery.min_google.js"></script>
+    <script src="../jquery/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../styles/bootstrap-4/js/bootstrap.min.js"></script>
+    <script src="../fontawesome/js/all.js"></script>
+    <script type="text/javascript" src='https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js'></script>
+    <script src="../js/paginasJs.js"></script>
+    <script src="../js/jsApplication.js"></script>
+
+    <script src="../ajax/pagseguro.js"></script>
+    <script type="text/javascript" src="../js/bibliotecas/chart.js"></script>
+    <title>Minha-Loja.com</title>
+</head>
+<body>
+    <header>
+        <?php $this->loadMenu(); ?>
+    </header>
+    <section class="">
+      <div class="container-fluid" id="corpoAdmim">
+        <div class="row">
+          <div class="col-md-1 col-sm-1 col-xs-1" id="menuLatral">
+            <nav class ="nav">
+              <ul class ="nav">
+                <li class ="nav-item">
+                  <button type="button" class="btn btnIcones"  data-toggle="tooltip" data-placement="right" title="Inicio" id="btnInicio">
+                    <i class="fas fa-home fa-3x"></i>
+                  </button>
+                </li>
+                <li class ="nav-item">
+                  <button type="button" class="btn btnIcones"  data-toggle="tooltip" data-placement="right" title="Desempenho" id="btnDesemprenho">
+                    <i class="fas fa-chart-bar fa-3x"></i>
+                  </button>
+                </li>
+                <li class ="nav-item">
+                  <button type="button" class="btn btnIcones"  data-toggle="tooltip" data-placement="right" title="Ativo Passivo" id="btnContas">
+                    <i class="fas fa-coins fa-3x"></i>
+                  </button>
+                </li>
+                <li class ="nav-item">
+                  <button type="button" class="btn btnIcones"  data-toggle="tooltip" data-placement="right" title="Estoque" id="btnPedidos">
+                    <i class="fas fa-cubes fa-4x" ></i>
+                  </button>
+                </li>
+                <li class ="nav-item">
+                  <button type="button" class="btn btnIcones"  data-toggle="tooltip" data-placement="right" title="Configurações" id="btnConfig">
+                    <i class="fas fa-cogs fa-3x"></i>
+                  </button>
+                </li>
+                <li class ="nav-item">
+                  <button type="button" class="btn btnIcones"  data-toggle="tooltip" data-placement="right" title="Usuarios" id="btnUsers">
+                    <i class="fas fa-users fa-3x"></i>
+                  </button>
+                </li>
+                <li class ="nav-item">
+                  <a href="/" target="_balck" class="btn btnIcones px-3"  data-toggle="tooltip" data-placement="right" title="Site">
+                    <i class="fas fa-window-maximize fa-3x"></i>
+                  </a>
+                </li>
+                <li class ="nav-item">
+                  <a href="/usuario/index" target="_self" class="btn btnIcones px-3"  data-toggle="tooltip" data-placement="right" title="Sair">
+                    <i class="fas fa-power-off fa-3x"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-md-11 col-sm-11" id="areaPainel">
+            <div class="container-fluid">
+              <div class="row mt-3 mb-3 ml-1 mr-1">
+                <div class="col-md-9 col-sm-12"  id="dinamic">
+
+                  <?php $this->content($view_path); ?>
+
+                </div>
+
+                <div class="col-md-3 col-sm-12" id="optionPlus">
+                  <div class="row ml-3 mb-0" style=" background-color: #fff;padding: 0px 5px 5px 5px;" >
+                    <div class="col">
+                    <div class="row">
+                        <div class="col pt-2">
+                          <?php
+                            if(isset($this->view->resultMonitEst) && (count($this->view->resultMonitEst) > 0)){
+
+
+                          ?>
+                            <div class="row">
+                              <div class="col py-3">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h4 align="center"><strong>Estoque</strong></h4>
+                                  </div>
+                                  <div class="card-body pt-5 card-one">
+                                    <div class="row">
+                                      <div class="col" align="center">
+                                        <h5 class="text-dark"><strong>Itens com estoque baixo: <?=$this->view->resultMonitEst['qtdItens']?></strong></h5>
+                                      </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                      <div class="col" align="center">
+                                        <a href="#" class="btn btn-secondary">Visualizar</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>  
+                            </div>
+                          <?php
+                            }
+                          ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col pt-2">
+                       <?php
+                            if(isset($this->view->resultMonitEst) && (count($this->view->resultMonitEst) > 0)){
+
+
+                          ?>
+                           <div class="row">
+                              <div class="col py-3">
+                                <div class="card" style="">
+                                  <div class="card-header">
+                                    <h4 align="center"><strong >Financeiro</strong></h4>
+                                  </div>
+                                  <div class="card-body card-two">
+                                    <div class="row">
+                                      <div class="col" align="center">
+                                        <div class="row text-light">
+                                          <div class="col pt-2 px-2" align="center">
+                                            <i class="text-danger fas fa-arrow-alt-circle-down fa-3x"></i>
+                                            <br>
+                                            <span class="text-danger" style="font-size: 15px;"><strong>R$ 1.800,00</strong></span>
+                                          </div>
+                                          <div class="col pt-2 px-2" align="center" style="margin: auto;">
+                                            <i class="text-success fas fa-arrow-alt-circle-up fa-3x"></i>
+                                              <br>
+                                              <span class="text-success" style="font-size: 15px;"><strong>R$ 1.200,00</strong></span>
+                                          </div>
+                                        </div>
+                                        <div class="row text-light">
+                                            <div class="col">
+                                              <div class="" align="center" style="margin: auto; font-size: 15px;">
+                                                <br><span class="text-success" style="font-size: 20px;"><strong>Saldo: R$ 600,00</strong></span>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>  
+                            </div>
+                          <?php
+                            }
+                          ?>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col pt-2">
+                        <?php
+                            if(isset($this->view->resultMonitEst) && (count($this->view->resultMonitEst) > 0)){
+
+
+                          ?>
+                            <div class="row">
+                              <div class="col py-3">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h4 align="center"><strong>Vendas</strong></h4>
+                                  </div>
+                                  <div class="card-body card-three">
+                                    <div class="row">
+                                      <div class="col" align="center">
+                                        <div class="row text-light">
+                                          <div class="col px-2" align="center">
+                                            <div class="text-dark" align="center" style="margin: auto; font-size: 15px;"></strong>Loja Fisic.</strong></div>
+                                            <i class="text-dark fas fa-arrow-alt-circle-up fa-3x"></i>
+                                            <br><span class="text-dark" style="font-size: 15px;"><strong>R$ 1.800,00</strong></span>
+                                          </div>
+                                          <div class="col px-2" align="center" style="margin: auto;">
+                                            <div class="" align="center" style="margin: auto;color: #1E90FF; font-size: 15px;"><strong>Loja Virt.</strong></div>
+                                            <i class="fas fa-arrow-alt-circle-up fa-3x" style="color: #1E90FF"></i>
+                                            <br><span class="" style="color: #1E90FF; font-size: 15px;"><strong>R$ 1.200,00</strong></span>
+                                          </div>
+                                        </div>
+                                        <div class="row text-light">
+                                            <div class="col">
+                                              <div class="" align="center" style="margin: auto;">
+                                                <br><span class="text-dark" style="font-size: 20px;"><strong>Total: R$ 3.000,00</strong></span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div> 
+                            </div>
+                          <?php
+                            }
+                          ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    <footer>
+
+      <?php $this->loadFooter(); ?>
+
+  
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-sm modal-lg modal-xl modal-dialog-centered">
+        <div class="modal-content">
+
+          
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal" id="closeModal">&times;</button>
+          </div>
+
+          
+          <div class="modal-body">
+            Modal body..
+          </div>
+          <div class="modal-footer">
+            
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    </footer>
+  </body>
+</html>
