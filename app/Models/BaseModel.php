@@ -47,7 +47,7 @@ abstract class BaseModel
         $inicio = ($itensPorPagina * $paginas) - $itensPorPagina;
 
 
-        $result = $this->select($campos, [],'=','asc', $inicio, $itensPorPagina, $class);
+        //$result = $this->select($campos, [],'=','asc', $inicio, $itensPorPagina, $class);
         
         return $result;
        
